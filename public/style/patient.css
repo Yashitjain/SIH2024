@@ -1,0 +1,108 @@
+/* styles.css */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+form {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-right: 0px;
+  padding-right: 0px;
+}
+
+input[type="radio"] {
+  margin-right: 10px;
+}
+
+button[type="submit"] {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+/* Add some space between the radio buttons and their labels */
+input[type="radio"]+label {
+  margin-left: 10px;
+}
+
+/* Center the form */
+form {
+  text-align: center;
+}
+
+/* Make the labels and inputs align left */
+label,
+input {
+  text-align: left;
+}
+
+/* Add some padding to the form to make it look better */
+form {
+  padding: 30px;
+}
+
+.main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+}
+
+
+.signupform {
+  width: 600px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+h1 {
+  font-family: 'Arial', sans-serif;
+  /* Sans-serif font */
+  font-size: 36px;
+  /* Adjust size as needed */
+  background: linear-gradient(to right, #0288d1, #ff4081);
+  /* Gradient from blue to pink */
+  -webkit-background-clip: text;
+  /* Clip the background to text */
+  -webkit-text-fill-color: transparent;
+  /* Make text color transparent */
+  margin: 0;
+  padding: 0;
+}
+
+img{
+  scale: 0.6;
+}
