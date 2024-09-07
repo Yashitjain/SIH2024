@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard</title>
+    <link href="style/dashboard.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="sidebar-upper">
+            <a href="#">Dashboard</a>
+            <a href="#">Next Session</a>
+            <a href="#">Progress Report</a>
+            <a href="#">Weekly Goals</a>
+            <a href="#">Therapy Details</a>
+            <a href="#">Messages</a>
+            <span></span>
+        </div>
+        <div class="sidebar-lower">
+            <a href="#">Settings</a>
+            <a href="#">Log Out</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="header">
+            <h2>Patient Dashboard</h2>
+            <div class="profile">
+                <img src="/images/profile.svg" alt="">
+
+                <span>Yashit Jain</span>
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            <div class="card">
+                <h3>Next Session</h3>
+                <p>Your next therapy session is on <strong>12th Sept, 10:00 AM</strong></p>
+            </div>
+
+            <div class="card">
+                <h3>Progress Report</h3>
+                <!-- <div class="progress-bar"> -->
+                    <!-- <span></span> -->
+                <!-- </div> -->
+                <a href="#" class="btn">View Details</a>
+            </div>
+
+            <div class="card">
+                <h3>Notifications</h3>
+                <ul>
+                    <li>Reminder: Therapy session tomorrow at 10 AM</li>
+                    <li>Payment due on 15th Sept</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Payment</h3>
+                <p>Next payment due on <strong>15th Sept</strong></p>
+                <a href="#" class="btn">Make Payment</a>
+            </div>
+
+            <div class="card">
+                <h3>Therapy Details</h3>
+                <p>Current therapy: <strong>Speech Therapy</strong></p>
+                <a href="#" class="btn">View Therapy Plan</a>
+            </div>
+
+            <!-- Calendar Section -->
+            <div class="calendar">
+                <div class="calendar-header">
+                    <button id="prev-month">&lt;</button>
+                    <h3 id="month-year"></h3>
+                    <button id="next-month">&gt;</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sun</th>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thu</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody id="calendar-body">
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        const currentDate = new Date();
+        let currentMonth = currentDate.getMonth();
+        let currentYear = currentDate.getFullYear();
+        const nextSessionDate = new Date(currentYear, 8, 12); // 12th September session
+        
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const monthYearDisplay = document.getElementById('month-year');
+        const calendarBody = document.getElementById('calendar-body');
+
+        document.getElementById('prev-month').addEventListener('click', () => {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            generateCalendar(currentMonth, currentYear);
+        });
+
+        document.getElementById('next-month').addEventListener('click', () => {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            generateCalendar(currentMonth, currentYear);
+        });
+
+        function generateCalendar(month, year) {
+            monthYearDisplay.textContent = `${monthNames[month]} ${year}`;
+            calendarBody.innerHTML = ''; // Clear the previous calendar
+
+            const firstDay = new Date(year, month).getDay();
+            const daysInMonth = 32 - new Date(year, month, 32).getDate();
+            let date = 1;
+
+            for (let i = 0; i < 6; i++) {
+                let row = document.createElement('tr');
+
+                for (let j = 0; j < 7; j++) {
+                    if (i === 0 && j < firstDay) {
+                        let cell = document.createElement('td');
+                        let cellText = document.createTextNode('');
+                        cell.appendChild(cellText);
+                        row.appendChild(cell);
+                    } else if (date > daysInMonth) {
+                        break;
+                    } else {
+                        let cell = document.createElement('td');
+                        let cellText = document.createTextNode(date);
+                        cell.appendChild(cellText);
+
+                        // Highlight next session date
+                        if (year === nextSessionDate.getFullYear() && month === nextSessionDate.getMonth() && date === nextSessionDate.getDate()) {
+                            cell.classList.add('next-session');
+                        }
+
+                        row.appendChild(cell);
+                        date++;
+                    }
+                }
+
+                calendarBody.appendChild(row);
+            }
+        }
+
+        generateCalendar(currentMonth, currentYear);
+    </script>
+
+</body>
+</html>
