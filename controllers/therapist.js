@@ -6,25 +6,8 @@ async function logintherapist(req,res) {
     console.log("id:",Id," password:",password);
     console.log("ID", Id)   
     //  console.log(req)
-
-    if(Id === ""){
-        return res.status(400).json({message: "Id is required"});
-    }if(password === ""){
-        return res.status(400).json({message: "Password is required"});
-    }
-
-    const user = await therapistModel.findOne({"Id":Id});
-    if(!user){
-        return res.status(400).json({message: "User does not exist"});
-    }
-
-    const isPasswordCorrect =  await therapistModel.findOne({"password" :password});
-
-    if(!isPasswordCorrect){
-        return res.status(400).json({message: "Password is incorrect"});
-    }
-
-    return res.render('therapistDashboard.ejs')
+    if(await therapistModel.findOne({"Id":Id,"password":password})) return res.render('therapistDashboard.ejs')
+    else return res.send("therapist Not Found");
 };
 
 
