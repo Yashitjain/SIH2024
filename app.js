@@ -5,7 +5,7 @@ const multer  = require('multer')
 const {patientModel} = require("./models/patient")
 const {patientRouter} = require("./routers/patient");
 const {therapistRouter} = require("./routers/therapist")
-mongoose.connect("mongodb+srv://Yashit:Yashit@2004@cluster0.dxdiu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+mongoose.connect("mongodb+srv://Yashit:Yashit%402004@cluster0.dxdiu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
 const app = express();
 app.use(express.json());
